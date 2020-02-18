@@ -1,5 +1,10 @@
 defmodule AuthMvp.Plugs.AuthenticatePerson do
-  use AuthMvpWeb, :router
+  @moduledoc """
+  Plug to authenticate a person.
+  Check if the Authorization is define in the request headers
+  and contains a valid jwt token
+  """
+  import Plug.Conn
 
   def init(opts), do: opts
 
@@ -15,6 +20,7 @@ defmodule AuthMvp.Plugs.AuthenticatePerson do
   defp get_token_from_header(nil), do: nil
 
   defp get_token_from_header({"authorization", value}) do
+    # regex check value start with Bearer follow by a space and any characters
     case Regex.run(~r/^Bearer\s(.*)/, value) do
       [_, jwt] -> jwt
       _ -> nil
