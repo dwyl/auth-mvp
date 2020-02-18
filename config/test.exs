@@ -16,3 +16,5 @@ config :auth_mvp, AuthMvpWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+config :auth_mvp, :elixir_auth_google, AuthMvp.Mock.ElixirAuthGoogle
+config :auth_mvp, :elixir_auth_github, AuthMvp.Mock.ElixirAuthGithub
