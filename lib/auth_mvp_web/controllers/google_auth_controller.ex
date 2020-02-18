@@ -9,8 +9,20 @@ defmodule AuthMvpWeb.GoogleAuthController do
   def index(conn, %{"code" => code} = params) do
     {:ok, token} = @elixir_auth_google.get_token(code, conn)
     {:ok, profile} = @elixir_auth_google.get_user_profile(token.access_token)
-    jwt = AuthMvp.Token.generate_and_sign!(%{email: profile.email})
 
+    # get the person by email
+    {:ok, session} = case AuthMvp.People.get_person_by_email(profile.email) do
+      nil ->
+        # Create the person
+        {:ok, person} = AuthMvp.People.create_person(%{email: profile.email})
+        AuthMvp.People.create_session(person)
+
+      person ->
+        AuthMvp.People.create_session(person)
+    end
+
+    jwt = AuthMvp.Token.generate_and_sign!(%{email: profile.email, session: session.id })
     redirect(conn, external: "#{params["client"]}?jwt=#{jwt}")
   end
+
 end
