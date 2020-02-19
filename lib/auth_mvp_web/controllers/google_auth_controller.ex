@@ -6,10 +6,11 @@ defmodule AuthMvpWeb.GoogleAuthController do
   @doc """
   `index/2` handles the callback from Google Auth API redirect.
   """
-  def index(conn, %{"code" => code, "state" => client}) do
+  def index(conn, %{"code" => code} = params) do
     {:ok, token} = @elixir_auth_google.get_token(code, conn)
     {:ok, profile} = @elixir_auth_google.get_user_profile(token.access_token)
+    jwt = AuthMvp.Token.generate_and_sign!(%{email: profile.email})
 
-    redirect(conn, external: "#{client}?jwt=test.jwt.example")
+    redirect(conn, external: "#{params["client"]}?jwt=#{jwt}")
   end
 end

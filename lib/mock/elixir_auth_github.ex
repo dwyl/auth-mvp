@@ -5,7 +5,7 @@ defmodule AuthMvp.Mock.ElixirAuthGithub do
   end
 
   def github_auth(_code) do
-    profile = %{name: "simonLab"}
+    profile = %{name: "simonLab", email: "simonLab@test.com"}
     {:ok, profile}
   end
 end

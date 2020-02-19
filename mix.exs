@@ -45,7 +45,8 @@ defmodule AuthMvp.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
       {:elixir_auth_google, "~> 1.1"},
-      {:elixir_auth_github, "~> 1.1"}
+      {:elixir_auth_github, "~> 1.1"},
+      {:joken, "~> 2.2"}
     ]
   end
 

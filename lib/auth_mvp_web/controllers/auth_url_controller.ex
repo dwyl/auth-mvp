@@ -5,7 +5,7 @@ defmodule AuthMvpWeb.AuthUrlController do
 
 
   def index(conn, _params) do
-    referer = get_referer(conn)
+    referer = get_referer(conn) || ""
     google_url = @elixir_auth_google.generate_oauth_url(conn, referer)
     github_url = @elixir_auth_github.login_url(%{scope: ["user:email"], state: referer})
 
@@ -18,7 +18,7 @@ defmodule AuthMvpWeb.AuthUrlController do
       {"referer", referer} ->
         referer
       nil ->
-        nil
+        ""
     end
   end
 end
