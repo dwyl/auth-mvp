@@ -1,2 +1,7 @@
-# auth-mvp
-The DWYL Authentication Service
+# AuthMvp
+
+DWYL Authentication service
+
+## API
+
+- `/auth/urls`: returns list of oauth applications' url.
