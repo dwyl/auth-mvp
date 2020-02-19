@@ -36,7 +36,7 @@ defmodule AuthMvpWeb.Router do
     pipe_through :api
     pipe_through :person
 
-    # get "/person/info", PersonController, :index
+    get "/person/info", PersonController, :index
   end
 
 end
