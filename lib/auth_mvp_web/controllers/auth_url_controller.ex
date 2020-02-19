@@ -3,7 +3,6 @@ defmodule AuthMvpWeb.AuthUrlController do
   @elixir_auth_google Application.get_env(:auth_mvp, :elixir_auth_google) || ElixirAuthGoogle
   @elixir_auth_github Application.get_env(:auth_mvp, :elixir_auth_github) || ElixirAuthGithub
 
-
   def index(conn, _params) do
     referer = get_referer(conn) || ""
     google_url = @elixir_auth_google.generate_oauth_url(conn, referer)
@@ -17,6 +16,7 @@ defmodule AuthMvpWeb.AuthUrlController do
     case List.keyfind(conn.req_headers, "referer", 0) do
       {"referer", referer} ->
         referer
+
       nil ->
         ""
     end

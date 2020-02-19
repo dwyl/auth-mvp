@@ -1,4 +1,7 @@
 defmodule AuthMvp.Mock.ElixirAuthGithub do
+  @moduledoc """
+  Mock third party request to Github
+  """
 
   def login_url(%{scope: _scope, state: _state}) do
     "github oauth url"
@@ -9,4 +12,3 @@ defmodule AuthMvp.Mock.ElixirAuthGithub do
     {:ok, profile}
   end
 end
-

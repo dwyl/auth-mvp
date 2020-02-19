@@ -14,6 +14,6 @@ defmodule AuthMvpWeb.PersonControllerTest do
            |> put_req_header("authorization", "Bearer #{jwt}")
            |> get("/person/info")
 
-    assert json_response(conn,200) == %{"data" => %{"email" => "person@dwyl.com"}}
+    assert json_response(conn, 200) == %{"data" => %{"email" => "person@dwyl.com"}}
   end
 end
