@@ -1,6 +1,11 @@
 defmodule AuthMvp.Plugs.AuthenticatePersonTest do
   use AuthMvpWeb.ConnCase
 
+  test "Plug init function doesn't change params" do
+    assert AuthMvp.Plugs.AuthenticatePerson.init(%{}) == %{}
+
+  end
+
   test "Plug return 401 wiht not Authorization Header" do
     conn = AuthMvp.Plugs.AuthenticatePerson.call(build_conn(), %{})
 
