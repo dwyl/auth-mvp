@@ -31,7 +31,10 @@ defmodule AuthMvp.Plugs.AuthenticatePerson do
 
   defp validate_token(conn, jwt) do
     case AuthMvp.Token.verify_and_validate(jwt) do
-      {:ok, claims} -> assign(conn, :claims, claims)
+      {:ok, values} ->
+        # convert map of string to atom, see https://stackoverflow.com/questions/31990134/how-to-convert-map-keys-from-strings-to-atoms-in-elixir
+        claims = for {key, val} <- values, into: %{}, do: {String.to_atom(key), val}
+        assign(conn, :claims, claims)
       {:error, _} -> unauthorized(conn)
     end
   end
