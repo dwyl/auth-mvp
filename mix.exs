@@ -10,7 +10,14 @@ defmodule AuthMvp.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -46,7 +53,9 @@ defmodule AuthMvp.MixProject do
       {:cors_plug, "~> 2.0"},
       {:elixir_auth_google, "~> 1.1"},
       {:elixir_auth_github, "~> 1.1"},
-      {:joken, "~> 2.2"}
+      {:joken, "~> 2.2"},
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.12.2", only: [:dev, :test]}
     ]
   end
 
@@ -60,7 +69,9 @@ defmodule AuthMvp.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      cover: ["coveralls.json"],
+      "cover.html": ["coveralls.html"]
     ]
   end
 end

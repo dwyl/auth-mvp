@@ -1,9 +1,11 @@
 defmodule AuthMvp.Mock.ElixirAuthGoogle do
+  @moduledoc """
+  Mock third party request to Google
+  """
 
   def generate_oauth_url(_conn, _state) do
     "google oauth url"
   end
-
 
   def get_token(_code, _conn) do
     {:ok, %{:access_token => "token"}}

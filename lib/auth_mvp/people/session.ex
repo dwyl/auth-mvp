@@ -1,4 +1,8 @@
 defmodule AuthMvp.People.Session do
+  @moduledoc """
+  Schema for session.
+  A person can have multiple sessions
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

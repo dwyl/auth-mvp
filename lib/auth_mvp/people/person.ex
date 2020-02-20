@@ -1,4 +1,7 @@
 defmodule AuthMvp.People.Person do
+  @moduledoc """
+  Schema for people.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
