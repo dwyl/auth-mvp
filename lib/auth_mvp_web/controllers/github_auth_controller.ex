@@ -6,8 +6,17 @@ defmodule AuthMvpWeb.GithubAuthController do
   """
   def index(conn, %{"code" => code, "state" => client}) do
     {:ok, profile} = @elixir_auth_github.github_auth(code)
-    jwt = AuthMvp.Token.generate_and_sign!(%{email: profile.email})
 
+    {:ok, session} = case AuthMvp.People.get_person_by_email(profile.email) do
+      nil ->
+        {:ok, person} = AuthMvp.People.create_person(%{email: profile.email})
+        AuthMvp.People.create_session(person)
+
+      person ->
+        AuthMvp.People.create_session(person)
+    end
+
+    jwt = AuthMvp.Token.generate_and_sign!(%{email: profile.email, session: session.id})
     redirect(conn, external: "#{client}?jwt=#{jwt}")
   end
 end
