@@ -13,6 +13,10 @@ defmodule AuthMvpWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :person do
+    plug AuthMvp.Plugs.AuthenticatePerson
+  end
+
   scope "/", AuthMvpWeb do
     pipe_through :browser
 
@@ -23,8 +27,16 @@ defmodule AuthMvpWeb.Router do
   scope "/", AuthMvpWeb do
     pipe_through :api
 
+    get "/auth/urls", AuthUrlController, :index
     get "/auth/google/callback", GoogleAuthController, :index
     get "/auth/github/callback", GithubAuthController, :index
-    get "/auth/urls", AuthUrlController, :index
   end
+
+  scope "/", AuthMvpWeb do
+    pipe_through :api
+    pipe_through :person
+
+    get "/person/info", PersonController, :index
+  end
+
 end
