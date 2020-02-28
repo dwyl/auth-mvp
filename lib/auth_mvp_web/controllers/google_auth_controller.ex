@@ -22,7 +22,7 @@ defmodule AuthMvpWeb.GoogleAuthController do
     end
 
     jwt = AuthMvp.Token.generate_and_sign!(%{email: profile.email, session: session.id })
-    redirect(conn, external: "#{params["client"]}?jwt=#{jwt}")
+    redirect(conn, external: "#{params["state"]}?jwt=#{jwt}")
   end
 
 end
