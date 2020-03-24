@@ -4,4 +4,10 @@ defmodule AuthMvp.Token do
   see https://hexdocs.pm/joken/configuration.html#module-approach
   """
   use Joken.Config
+
+  @impl true
+  def token_config do
+    default_claims(exp: 31_537_000 ) # ~ 1 year in seconds
+  end
+
 end
