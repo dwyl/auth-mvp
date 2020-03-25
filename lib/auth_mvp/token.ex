@@ -7,7 +7,7 @@ defmodule AuthMvp.Token do
 
   @impl true
   def token_config do
-    default_claims(exp: 31_537_000 ) # ~ 1 year in seconds
+    default_claims(default_exp: 31_537_000 ) # ~ 1 year in seconds
   end
 
 end
