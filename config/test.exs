@@ -18,4 +18,3 @@ config :auth_mvp, AuthMvpWeb.Endpoint,
 config :logger, level: :warn
 config :auth_mvp, :elixir_auth_google, AuthMvp.Mock.ElixirAuthGoogle
 config :auth_mvp, :elixir_auth_github, AuthMvp.Mock.ElixirAuthGithub
-config :joken, default_signer: "secret"
