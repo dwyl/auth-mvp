@@ -1,4 +1,4 @@
-# AuthMvpi
+# Auth MVP
 
 [![Build Status](https://img.shields.io/travis/dwyl/auth-mvp/master.svg?style=flat-square)](https://travis-ci.org/dwyl/auth-mvp)
 [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/auth-mvp/master.svg?style=flat-square)](http://codecov.io/github/dwyl/auth-mvp?branch=master)
