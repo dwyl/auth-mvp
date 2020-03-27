@@ -24,7 +24,8 @@ defmodule AuthMvp.Email do
   """
 
   def sendemail(params) do
-    url = "https://dwylmail.herokuapp.com/api/send"
+    url = System.get_env("EMAIL_APP_URL") <> "/api/send"
+    IO.inspect(url)
     jwt = AuthMvp.Token.generate_and_sign!(params)
     headers = ["Authorization": "#{jwt}"]
     options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 10000]
