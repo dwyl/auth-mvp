@@ -5,6 +5,7 @@
     "skip_files": [
       "test/",
       "lib/auth_mvp_web.ex",
+      "lib/auth_mvp/application.ex",
       "lib/auth_mvp_web/views/error_helpers.ex"
     ]
   }
