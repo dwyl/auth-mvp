@@ -10,6 +10,7 @@ defmodule AuthMvpWeb.GithubAuthController do
     {:ok, session} = case AuthMvp.People.get_person_by_email(profile.email) do
       nil ->
         {:ok, person} = AuthMvp.People.create_person(%{email: profile.email})
+        AuthMvp.Email.sendemail(%{email: profile.email, template: "welcome"})
         AuthMvp.People.create_session(person)
 
       person ->
