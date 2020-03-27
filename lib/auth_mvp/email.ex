@@ -27,7 +27,7 @@ defmodule AuthMvp.Email do
     url = "https://dwylmail.herokuapp.com/api/send"
     jwt = AuthMvp.Token.generate_and_sign!(params)
     headers = ["Authorization": "#{jwt}"]
-    options = [] # [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 5000]
+    options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 10000]
     {:ok, response} = HTTPoison.post(url, "_nobody", headers, options)
     Jason.decode!(response.body)
   end
