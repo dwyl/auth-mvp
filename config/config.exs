@@ -13,7 +13,7 @@ config :auth_mvp,
 # Configures the endpoint
 config :auth_mvp, AuthMvpWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "R+SYk92dfv9sFdtZV4dpz1zdSs65LCOE+B449/qc25LR9iBkCU1DzXAI/VIZSS74",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: AuthMvpWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: AuthMvp.PubSub, adapter: Phoenix.PubSub.PG2]
 
@@ -28,3 +28,6 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+# https://hexdocs.pm/joken/introduction.html#usage
+config :joken, default_signer: System.get_env("SECRET_KEY_BASE")
