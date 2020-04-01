@@ -28,7 +28,6 @@ defmodule AuthMvpWeb.Router do
   scope "/", AuthMvpWeb do
     pipe_through :api
 
-    get "/auth/urls", AuthUrlController, :index
     get "/auth/google/callback", GoogleAuthController, :index
     get "/auth/github/callback", GithubAuthController, :index
   end
