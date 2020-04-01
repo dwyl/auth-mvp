@@ -1,0 +1,5 @@
+<h1>Login page</h1>
+
+  <%= for url <- @urls do %>
+    <a href="<%= url.url%>"><%= url.type%></a>
+  <% end %>
