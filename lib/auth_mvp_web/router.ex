@@ -21,13 +21,13 @@ defmodule AuthMvpWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/auth/urls", AuthUrlController, :login
   end
 
   # Other scopes may use custom stacks.
   scope "/", AuthMvpWeb do
     pipe_through :api
 
-    get "/auth/urls", AuthUrlController, :index
     get "/auth/google/callback", GoogleAuthController, :index
     get "/auth/github/callback", GithubAuthController, :index
   end
