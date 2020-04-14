@@ -1,11 +1,11 @@
 defmodule AuthMvpWeb.GithubAuthController do
   use AuthMvpWeb, :controller
-  @elixir_auth_github Application.get_env(:auth_mvp, :elixir_auth_github) || ElixirAuthGithub
+  
   @doc """
   `index/2` handles the callback from GitHub Auth API redirect.
   """
   def index(conn, %{"code" => code, "state" => client}) do
-    {:ok, profile} = @elixir_auth_github.github_auth(code)
+    {:ok, profile} = ElixirAuthGithub.github_auth(code)
 
     {:ok, session} = case AuthMvp.People.get_person_by_email(profile.email) do
       nil ->

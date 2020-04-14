@@ -4,7 +4,7 @@ defmodule AuthMvp.MixProject do
   def project do
     [
       app: :auth_mvp,
-      version: "0.1.0",
+      version: "1.2.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -51,8 +51,8 @@ defmodule AuthMvp.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
-      {:elixir_auth_google, "~> 1.1"},
-      {:elixir_auth_github, "~> 1.1"},
+      {:elixir_auth_google, "~> 1.2.0"},
+      {:elixir_auth_github, "~> 1.2.0"},
       {:joken, "~> 2.2"},
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.12.2", only: [:dev, :test]}
