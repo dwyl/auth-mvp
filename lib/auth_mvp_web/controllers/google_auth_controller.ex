@@ -7,21 +7,31 @@ defmodule AuthMvpWeb.GoogleAuthController do
   def index(conn, %{"code" => code} = params) do
     {:ok, token} = ElixirAuthGoogle.get_token(code, conn)
     {:ok, profile} = ElixirAuthGoogle.get_user_profile(token.access_token)
-
     # get the person by email
-    {:ok, session} = case AuthMvp.People.get_person_by_email(profile.email) do
-      nil ->
-        # Create the person
-        {:ok, person} = AuthMvp.People.create_person(%{email: profile.email})
-        AuthMvp.Email.sendemail(%{email: profile.email, template: "welcome"})
-        AuthMvp.People.create_session(person)
+    {:ok, session} =
+      case AuthMvp.People.get_person_by_email(profile.email) do
+        nil ->
+          # Create the person
+          {:ok, person} =
+            AuthMvp.People.create_person(%{email: profile.email, avatar: profile.picture})
 
-      person ->
-        AuthMvp.People.create_session(person)
-    end
+          # AuthMvp.Email.sendemail(%{email: profile.email, template: "welcome"})
+          AuthMvp.People.create_session(person)
 
-    jwt = AuthMvp.Token.generate_and_sign!(%{email: profile.email, session: session.id })
+        person ->
+          {:ok, p} = AuthMvp.People.update_person(person, %{avatar: profile.picture})
+          AuthMvp.People.create_session(p)
+      end
+
+    person = AuthMvp.People.get_person_by_email(profile.email)
+
+    jwt =
+      AuthMvp.Token.generate_and_sign!(%{
+        email: person.email,
+        session: session.id,
+        avatar: person.avatar
+      })
+
     redirect(conn, external: "#{params["state"]}?jwt=#{jwt}")
   end
-
 end

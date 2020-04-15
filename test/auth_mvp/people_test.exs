@@ -6,9 +6,9 @@ defmodule AuthMvp.PeopleTest do
   describe "people" do
     alias AuthMvp.People.Person
 
-    @valid_attrs %{email: "some email", verified: true}
-    @update_attrs %{email: "some updated email", verified: false}
-    @invalid_attrs %{email: nil, verified: nil}
+    @valid_attrs %{email: "some email", verified: true, avatar: "/url_avatar"}
+    @update_attrs %{email: "some updated email", verified: false, avatar: "/url_avatar"}
+    @invalid_attrs %{email: nil, verified: nil, avatar: ""}
 
     def person_fixture(attrs \\ %{}) do
       {:ok, person} =
