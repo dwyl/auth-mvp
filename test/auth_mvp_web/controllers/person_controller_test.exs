@@ -20,5 +20,6 @@ defmodule AuthMvpWeb.PersonControllerTest do
 
     response = json_response(conn, 200)
     assert response["data"]["email"] == "person@dwyl.com"
+    assert response["data"]["avatar"] == "/url_avatar"
   end
 end
