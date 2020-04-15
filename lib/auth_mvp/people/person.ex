@@ -8,6 +8,7 @@ defmodule AuthMvp.People.Person do
   schema "people" do
     field :email, :string
     field :verified, :boolean, default: false
+    field :avatar, :string
 
     has_many :sessions, AuthMvp.People.Session
     timestamps()
@@ -16,7 +17,7 @@ defmodule AuthMvp.People.Person do
   @doc false
   def changeset(person, attrs) do
     person
-    |> cast(attrs, [:email, :verified])
-    |> validate_required([:email, :verified])
+    |> cast(attrs, [:email, :verified, :avatar])
+    |> validate_required([:email, :verified, :avatar])
   end
 end
