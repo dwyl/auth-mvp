@@ -8,7 +8,9 @@ defmodule AuthMvpWeb.PersonControllerTest do
   end
 
   test "Get /person/info returns person email when request header authorization is correct" do
-    assert {:ok, %Person{} = person} = AuthMvp.People.create_person(%{email: "person@dwyl.com", avatar: ""})
+    assert {:ok, %Person{} = person} =
+             AuthMvp.People.create_person(%{email: "person@dwyl.com", avatar: "/url_avatar"})
+
     jwt = AuthMvp.Token.generate_and_sign!(%{email: "person@dwyl.com"})
 
     conn =
